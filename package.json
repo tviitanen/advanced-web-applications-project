@@ -4,7 +4,13 @@
   "description": "Project work for Advanced Web Applications course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cd server && npm start",
+    "install": "cd client && npm install",
+    "dev:client": "cd client && npm start",
+    "preinstall": "cd server && npm install",
+    "dev:server": "cd server && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm run build"
   },
   "author": "Teemu Viitanen",
   "license": "ISC"
