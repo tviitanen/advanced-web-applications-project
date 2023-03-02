@@ -13,5 +13,5 @@
     "build": "cd client && npm run build"
   },
   "author": "Teemu Viitanen",
-  "license": "ISC"
+  "license": "MIT"
 }
