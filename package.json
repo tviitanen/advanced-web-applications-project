@@ -1,0 +1,11 @@
+{
+  "name": "advanced-web-applications-project",
+  "version": "1.0.0",
+  "description": "Project work for Advanced Web Applications course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Teemu Viitanen",
+  "license": "ISC"
+}
