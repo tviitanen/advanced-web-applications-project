@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
 
 export const Login = (props) => {
   const [userData, setUserData] = useState({});
@@ -55,7 +56,9 @@ export const Login = (props) => {
           id="password"
           name="password"
         />
-        <button type="submit">Log In</button>
+        <button className="button" type="submit">
+          Log In
+        </button>
       </form>
       <button
         className="link-btn"

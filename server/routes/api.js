@@ -1,23 +1,45 @@
 var express = require("express");
 var router = express.Router();
+const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
+const { body, validationResult } = require("express-validator");
+const User = require("../models/User");
+const Code = require("../models/Code");
+const jwt = require("jsonwebtoken");
+const validateToken = require("../auth/validateToken.js");
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-const data = [
-  { id: 1, name: "foo" },
-  { id: 2, name: "bar" },
-  { id: 3, name: "baz" },
-  { id: 4, name: "wtf" },
-  { id: 5, name: "lol" },
-  { id: 6, name: "n00b" },
-];
-
-/* GET data . */
-router.get("/data", function (req, res, next) {
-  console.log(data);
-  res.json(data);
+/* GET code data. */
+router.get("/data", (req, res, next) => {
+  Code.find({}, (err, codes) => {
+    if (err) return next(err);
+    console.log(data);
+    res.json(codes);
+  });
 });
 
-router.get("/data/:id", function (req, res, next) {
-  res.json(data.find((data) => data.id == req.params.id));
+/* POST code snippet */
+router.post("/data", validateToken, (req, res, next) => {
+  Code.findOne({ author: req.body.author }, (err, code) => {
+    if (err) return next(err);
+    new Code({
+      author: req.body.author,
+      snippets: [
+        {
+          title: req.body.title,
+          date: Date.now(),
+          votes: 0,
+          comments: "",
+          code: req.body.code,
+        },
+      ],
+    }).save((err) => {
+      if (err) return next(err);
+      return res.send(req.body);
+    });
+  });
 });
 
 module.exports = router;
