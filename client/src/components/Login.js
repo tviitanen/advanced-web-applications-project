@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
   const [userData, setUserData] = useState({});
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData.email);
 
-    fetch("/users/login", {
+    fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -26,6 +28,8 @@ export const Login = (props) => {
               Buffer.from(data.token.split(".")[1], "base64").toString()
             )
           );
+          let path = `/register`;
+          navigate(path);
         }
       });
   };
@@ -60,12 +64,7 @@ export const Login = (props) => {
           Log In
         </button>
       </form>
-      <button
-        className="link-btn"
-        onClick={() => props.onFormSwitch("register")}
-      >
-        Don't have an account? Register here.
-      </button>
+      <Link to="/register"> Don't have an account? Register here. </Link>
     </div>
   );
 };

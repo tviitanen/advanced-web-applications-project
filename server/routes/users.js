@@ -25,12 +25,15 @@ router.get("/listx", (req, res) => {
   res.json({ status: "ok" });
 });
 
+router.get("/login", (req, res, next) => {});
+
 router.post("/login", upload.none(), (req, res, next) => {
   console.log(req.body);
 
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) throw err;
     if (!user) {
+      console.log("User not found");
       return res.status(403).json({ message: "Login failed" });
     } else {
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
@@ -49,6 +52,7 @@ router.post("/login", upload.none(), (req, res, next) => {
             },
             (err, token) => {
               console.log(err);
+              console.log(token);
               res.json({ success: true, token });
             }
           );
@@ -76,6 +80,7 @@ router.post(
         throw err;
       }
       if (user) {
+        console.log("Email already in use");
         return res.status(403).json({ email: "Email already in use" });
       } else {
         bcrypt.genSalt(10, (err, salt) => {
@@ -89,6 +94,7 @@ router.post(
               },
               (err, ok) => {
                 if (err) throw err;
+                console.log("User created");
                 return res.redirect("/users/login");
               }
             );

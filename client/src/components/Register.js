@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
   const [userData, setUserData] = useState({});
+
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userData.email);
 
-    fetch("/users/register", {
+    fetch("http://localhost:4000/users/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -25,6 +29,8 @@ export const Register = (props) => {
               Buffer.from(data.token.split(".")[1], "base64").toString()
             )
           );
+          let path = `/register`;
+          navigate(path);
         }
       });
   };
@@ -61,9 +67,7 @@ export const Register = (props) => {
           Register
         </button>
       </form>
-      <button className="link-btn" onClick={() => props.onFormSwitch("login")}>
-        Already have an account? Login here.
-      </button>
+      <Link to="/login"> Already have an account? Login here. </Link>
     </div>
   );
 };
