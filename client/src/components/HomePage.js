@@ -17,12 +17,14 @@ export const HomePage = (props) => {
 
   return (
     <div>
-      <button className="menu" onClick={routeChange}>
+      <button className="menu-button" onClick={routeChange}>
         Sign up
       </button>
       <h1>Code snippet app</h1>
       <h2>{props.jwt ? `Welcome ${props.user.name}!` : ""}</h2>
-      <button onClick={createNewSnippet}>+</button>
+      <button className="button" onClick={createNewSnippet}>
+        +
+      </button>
 
       <p>Some content</p>
     </div>

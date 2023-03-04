@@ -31,7 +31,7 @@ export const AddSnippet = (props) => {
 
   return (
     <div className="addSnippet-container">
-      <h2>Login</h2>
+      <h2>Add Code Snippet</h2>
       <form
         className="addSnippet-form"
         onSubmit={handleSubmit}

@@ -52,7 +52,7 @@ button {
 }
 .button:active {
   background-color: #008CBA;
-  box-shadow: 0 5px #666;
+  box-shadow: 0 5px #808185;
   transform: translateY(4px);
 }
 .link-btn {
@@ -60,7 +60,7 @@ button {
   color: white;
   text-decoration: underline;
 }
-.menu {
+.menu-button {
   top: 10px;
   right: 10px;
   display: flex;
@@ -68,6 +68,15 @@ button {
   position: absolute;
   margin: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid white;
   border-radius: 10px;
+}
+.menu-button:hover {
+  background-color: #ADD8E6;
+  color: white;
+}
+
+.menu-button:active {
+  background-color: #008CBA;
+  box-shadow: 0 5px #808185;
+  transform: translateY(4px);
 }
