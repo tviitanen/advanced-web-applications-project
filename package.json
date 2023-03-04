@@ -4,16 +4,14 @@
   "description": "Project work for Advanced Web Applications course",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && npm start",
-    "install": "cd client && npm install",
-    "dev:client": "cd client && npm start",
-    "preinstall": "cd server && npm install",
-    "dev:server": "cd server && npm run dev",
-    "build": "cd client && npm run build"
+    "client": "npm start --prefix client",
+    "server": "npm run start --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Teemu Viitanen",
   "license": "MIT",
   "dependencies": {
+    "concurrently": "^7.6.0",
     "react-materialize": "^3.10.0"
   }
 }
