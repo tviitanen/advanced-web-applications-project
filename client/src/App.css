@@ -80,3 +80,10 @@ button {
   box-shadow: 0 5px #808185;
   transform: translateY(4px);
 }
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}

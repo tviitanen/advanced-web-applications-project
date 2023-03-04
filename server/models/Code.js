@@ -9,7 +9,7 @@ let codeSchema = new Schema({
       title: { type: String },
       date: { type: Date },
       votes: { type: Number },
-      comments: { type: String },
+      comments: [{ type: String }],
       code: { type: String },
     },
   ],

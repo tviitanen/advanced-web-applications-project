@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const AddSnippet = (props) => {
-  let navigate = useNavigate();
+export const Comment = (props) => {
   const [snippetData, setSnippetData] = useState({});
 
   const handleSubmit = (event) => {
@@ -14,7 +12,7 @@ export const AddSnippet = (props) => {
       },
       body: JSON.stringify({
         author: props.user.name,
-        snippets: { title: snippetData.title, code: snippetData.code },
+        snippets: { title: snippetData.title, comments: snippetData.comment },
       }),
       mode: "cors",
     })
@@ -22,7 +20,6 @@ export const AddSnippet = (props) => {
       .then((data) => {
         console.log(data);
       });
-    navigate("/");
   };
 
   const handleChange = (event) => {
@@ -30,24 +27,21 @@ export const AddSnippet = (props) => {
   };
 
   return (
-    <div className="addSnippet-container">
-      <h2>Add Code Snippet</h2>
+    <div className="addComment-container">
       <form
-        className="addSnippet-form"
+        className="addComment-form"
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
-        <label htmlFor="title">Title</label>
-        <input type="String" placeholder="Add title" id="title" name="title" />
-        <label htmlFor="code">Code snippet</label>
+        <label htmlFor="comment">Add comment</label>
         <input
           type="String"
-          placeholder="Type your code here"
-          id="code"
-          name="code"
+          placeholder="Type your comment here"
+          id="comment"
+          name="comment"
         />
         <button className="button" type="submit">
-          Add snippet
+          Add comment
         </button>
       </form>
     </div>

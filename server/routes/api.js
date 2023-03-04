@@ -21,7 +21,7 @@ router.get("/data", (req, res, next) => {
 });
 
 /* POST code snippet */
-router.post("/data", validateToken, (req, res, next) => {
+router.post("/add-data", validateToken, (req, res, next) => {
   Code.findOne({ author: req.body.author }, (err, code) => {
     if (err) return next(err);
     new Code({
