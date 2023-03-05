@@ -28,6 +28,10 @@ function App() {
       name: "Add snippet",
       path: "/add-snippet",
     },
+    {
+      name: "Snippets",
+      path: "/snippets",
+    },
   ];
 
   return (
@@ -51,7 +55,7 @@ function App() {
             path="/add-snippet"
             element={<AddSnippet user={user} jwt={jwt} />}
           />
-          <Route path="/snippets" element={<SnippetData />} />
+          <Route path="/snippets" element={<SnippetData jwt={jwt} />} />
         </Routes>
       </div>
     </Router>

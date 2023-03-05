@@ -9,11 +9,10 @@ const storage = multer.memoryStorage();
 
 /* GET snippet data from the DB. */
 router.get("/snippets/list", async (req, res, next) => {
-  await Code.find({}, (err, codes) => {
-    if (err) return next(err);
+  await Code.find({}).then((codes) => {
+    console.log(codes);
     if (!codes) return res.status(404).json({ message: "No codes found" });
-    console.log("codes found");
-    res.json(codes);
+    return res.json(codes);
   });
 });
 

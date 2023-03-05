@@ -19,8 +19,6 @@ export const HomePage = (jwt) => {
       <button className="button" onClick={createNewSnippet}>
         +
       </button>
-
-      <p>Some content</p>
     </div>
   );
 };

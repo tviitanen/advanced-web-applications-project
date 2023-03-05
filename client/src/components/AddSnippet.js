@@ -36,7 +36,7 @@ export const AddSnippet = (jwt) => {
         console.log(data);
         setSnippetData(data);
       });
-    navigate("/");
+    navigate("/snippets");
   };
 
   const handleChange = (event) => {
