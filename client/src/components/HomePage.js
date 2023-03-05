@@ -6,9 +6,10 @@ export const HomePage = (jwt) => {
   const createNewSnippet = () => {
     // TODO: check if user is already logged in, redirect to login page if not
     if (jwt.jwt !== false) {
-      console.log(jwt);
+      console.log(jwt.jwt);
       navigate("/add-snippet");
     } else {
+      console.log(jwt.jwt);
       navigate("/login");
     }
   };
@@ -16,7 +17,7 @@ export const HomePage = (jwt) => {
   return (
     <div>
       <h1>Code snippet app</h1>
-      <h2>{jwt ? `Welcome ${jwt.user.name}!` : ""}</h2>
+      <h2>{jwt.jwt ? `Welcome ${jwt.user.name}!` : ""}</h2>
       <button className="button" onClick={createNewSnippet}>
         +
       </button>

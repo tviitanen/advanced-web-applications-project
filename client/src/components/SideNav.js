@@ -51,17 +51,6 @@ export default function SideNav(props) {
             </Link>
           </li>
         ))}
-        <li>
-          <div className="divider" />
-        </li>
-        <li>
-          <p className="subheader">Subheader</p>
-        </li>
-        <li>
-          <a className="waves-effect" href="#!">
-            Third Link With Waves
-          </a>
-        </li>
       </ul>
     </>
   );

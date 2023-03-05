@@ -42,7 +42,10 @@ function App() {
               <Login setJwt={setJwt} setUser={setUser} jwt={jwt} user={user} />
             }
           />
-          <Route path="/register" element={<Register setUser={setUser} />} />
+          <Route
+            path="/register"
+            element={<Register setUser={setUser} jwt={jwt} />}
+          />
           <Route
             path="/add-snippet"
             element={<AddSnippet user={user} jwt={jwt} />}

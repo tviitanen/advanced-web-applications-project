@@ -1,21 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const AddSnippet = (props) => {
+export const AddSnippet = (jwt) => {
   let navigate = useNavigate();
   const [snippetData, setSnippetData] = useState({});
-  const jwt = props.jwt;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log(snippetData);
     // check if user is already logged in, redirect to login page if not
-    if (jwt.jwt !== false) {
+    if (jwt !== false) {
       alert("You have to be logged in to add a snippet");
       return;
     }
 
-    fetch("http://localhost:4000/api/add-data", {
+    fetch("http://localhost:4000/api/snippets/post", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
