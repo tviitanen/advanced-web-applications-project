@@ -40,7 +40,7 @@ export const Register = (props) => {
   };
 
   return (
-    <div className="auth-form-container">
+    <div className="form-container">
       <h2>Register</h2>
       <form
         className="register-form"

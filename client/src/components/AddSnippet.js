@@ -30,7 +30,7 @@ export const AddSnippet = (props) => {
   };
 
   return (
-    <div className="addSnippet-container">
+    <div className="form-container">
       <h2>Add Code Snippet</h2>
       <form
         className="addSnippet-form"

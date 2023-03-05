@@ -40,7 +40,7 @@ export const Login = (props) => {
   };
 
   return (
-    <div className="auth-form-container">
+    <div className="form-container">
       <h2>Login</h2>
       <form
         className="login-form"
