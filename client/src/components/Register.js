@@ -10,7 +10,10 @@ export const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (jwt) {
+      alert("You are already logged in");
+      return;
+    }
     console.log(userData.email);
 
     fetch("http://localhost:4000/users/register", {
