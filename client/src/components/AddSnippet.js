@@ -4,9 +4,15 @@ import { useState } from "react";
 export const AddSnippet = (props) => {
   let navigate = useNavigate();
   const [snippetData, setSnippetData] = useState({});
+  const jwt = props.jwt;
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!jwt) {
+      alert("You need to be logged in to add a snippet");
+      return;
+    }
+
     fetch("http://localhost:4000/api/add-data", {
       method: "POST",
       headers: {
@@ -38,11 +44,18 @@ export const AddSnippet = (props) => {
         onChange={handleChange}
       >
         <label htmlFor="title">Title</label>
-        <input type="String" placeholder="Add title" id="title" name="title" />
+        <input
+          type="String"
+          required
+          placeholder="Add title"
+          id="title"
+          name="title"
+        />
         <label htmlFor="code">Code snippet</label>
         <div className="input-field col s12">
           <textarea
             type="String"
+            required
             className="materialize-textarea"
             placeholder="Type your code here"
             id="code"

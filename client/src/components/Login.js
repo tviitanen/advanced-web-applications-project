@@ -6,9 +6,14 @@ export const Login = (props) => {
   const [userData, setUserData] = useState({});
 
   let navigate = useNavigate();
+  const jwt = props.jwt;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (jwt) {
+      alert("You are already logged in");
+      return;
+    }
     console.log(userData.email);
 
     fetch("http://localhost:4000/users/login", {
@@ -48,19 +53,25 @@ export const Login = (props) => {
         onChange={handleChange}
       >
         <label htmlFor="email">email</label>
-        <input
-          type="email"
-          placeholder="youremail@mail.com"
-          id="email"
-          name="email"
-        />
+        <div className="input-field">
+          <input
+            type="email"
+            required
+            placeholder="youremail@mail.com"
+            id="email"
+            name="email"
+          />
+        </div>
         <label htmlFor="password">password</label>
-        <input
-          type="password"
-          placeholder="********"
-          id="password"
-          name="password"
-        />
+        <div className="input-field">
+          <input
+            type="password"
+            required
+            placeholder="********"
+            id="password"
+            name="password"
+          />
+        </div>
         <button className="button" type="submit">
           Log In
         </button>

@@ -80,3 +80,6 @@ button {
   border: none;
   border-radius: 10px;
 }
+.input-field input {
+  color: white;
+}

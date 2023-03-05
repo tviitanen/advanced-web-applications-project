@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
   const [userData, setUserData] = useState({});
+  const jwt = props.jwt;
 
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log(userData.email);
 
     fetch("http://localhost:4000/users/register", {
@@ -48,21 +50,29 @@ export const Register = (props) => {
         onChange={handleChange}
       >
         <label htmlFor="name">Full name</label>
-        <input name="name" id="name" placeholder="full name" />
+        <div className="input-field">
+          <input name="name" id="name" required placeholder="full name" />
+        </div>
         <label htmlFor="email">email</label>
-        <input
-          type="email"
-          placeholder="youremail@mail.com"
-          id="email"
-          name="email"
-        />
+        <div className="input-field">
+          <input
+            type="email"
+            required
+            placeholder="youremail@mail.com"
+            id="email"
+            name="email"
+          />
+        </div>
         <label htmlFor="password">password</label>
-        <input
-          type="password"
-          placeholder="********"
-          id="password"
-          name="password"
-        />
+        <div className="input-field">
+          <input
+            type="password"
+            required
+            placeholder="********"
+            id="password"
+            name="password"
+          />
+        </div>
         <button type="submit" className="button">
           Register
         </button>
