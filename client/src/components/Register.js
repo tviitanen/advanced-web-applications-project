@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // REGISTER PAGE
-export const Register = (props) => {
+export const Register = (jwt) => {
   const [userData, setUserData] = useState({});
 
   let navigate = useNavigate();
@@ -12,8 +12,8 @@ export const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: check if user is already logged in, redirect to home page
-    if (props.jwt) {
+    // check if user is already logged in, redirect to home page
+    if (jwt.jwt !== false) {
       alert("You are already logged in");
       return;
     }

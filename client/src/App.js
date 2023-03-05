@@ -4,12 +4,13 @@ import Login from "./components/Login";
 import { Register } from "./components/Register";
 import { HomePage } from "./components/HomePage";
 import { AddSnippet } from "./components/AddSnippet";
+import Posts from "./components/Posts";
 import SideNav from "./components/SideNav";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   // use state to store jwt and user data
-  const [jwt, setJwt] = useState("");
+  const [jwt, setJwt] = useState(false);
   const [user, setUser] = useState({});
 
   // paths for the side nav
@@ -34,7 +35,7 @@ function App() {
         <SideNav className="navbar" paths={menuPaths} title="Menu" />
         <ul id="slide-out" className="sidenav"></ul>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage user={user} jwt={jwt} />} />
           <Route
             path="/login"
             element={
@@ -42,7 +43,11 @@ function App() {
             }
           />
           <Route path="/register" element={<Register setUser={setUser} />} />
-          <Route path="/add-snippet" element={<AddSnippet />} />
+          <Route
+            path="/add-snippet"
+            element={<AddSnippet user={user} jwt={jwt} />}
+          />
+          <Route path="/posts" element={<Posts user={user} jwt={jwt} />} />
         </Routes>
       </div>
     </Router>

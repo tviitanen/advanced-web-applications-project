@@ -11,8 +11,8 @@ export default function Login({ setJwt, jwt, user, setUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: check if user is already logged in, redirect to home page
-    if (!user) {
+    // check if user is already logged in, redirect to home page
+    if (jwt.jwt !== false) {
       alert("You are already logged in");
       return;
     }
