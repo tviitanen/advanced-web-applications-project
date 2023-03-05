@@ -40,12 +40,15 @@ export const AddSnippet = (props) => {
         <label htmlFor="title">Title</label>
         <input type="String" placeholder="Add title" id="title" name="title" />
         <label htmlFor="code">Code snippet</label>
-        <input
-          type="String"
-          placeholder="Type your code here"
-          id="code"
-          name="code"
-        />
+        <div className="input-field col s12">
+          <textarea
+            type="String"
+            className="materialize-textarea"
+            placeholder="Type your code here"
+            id="code"
+            name="code"
+          />
+        </div>
         <button className="button" type="submit">
           Add snippet
         </button>

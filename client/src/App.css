@@ -70,3 +70,13 @@ button {
   top: 0;
   width: 100%;
 }
+
+.input-field textarea{
+  background-color: white;
+  height: 100px;
+  width: 100%;
+  resize: none;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
