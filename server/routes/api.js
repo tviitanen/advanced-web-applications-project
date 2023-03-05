@@ -1,27 +1,23 @@
 var express = require("express");
 var router = express.Router();
-const bcrypt = require("bcryptjs");
-const mongoose = require("mongoose");
-const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Code = require("../models/Code");
-const jwt = require("jsonwebtoken");
+const Comment = require("../models/Comment");
 const validateToken = require("../auth/validateToken.js");
 const multer = require("multer");
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
-/* GET code data. */
-router.get("/data", (req, res, next) => {
-  Code.find({}, (err, codes) => {
+/* GET code data from the DB. */
+router.get("/snippets/list", async (req, res, next) => {
+  await Code.find({}, (err, codes) => {
     if (err) return next(err);
-    console.log(data);
+    if (!codes) return res.status(404).json({ message: "No codes found" });
     res.json(codes);
   });
 });
 
-/* POST code snippet */
-router.post("/add-data", validateToken, (req, res, next) => {
+/* POST route to post code snippet */
+router.post("/snippets/post", validateToken, (req, res, next) => {
   Code.findOne({ author: req.body.author }, (err, code) => {
     if (err) return next(err);
     new Code({
@@ -37,9 +33,44 @@ router.post("/add-data", validateToken, (req, res, next) => {
       ],
     }).save((err) => {
       if (err) return next(err);
-      return res.send(req.body);
+      return res.json({ message: "Code snippet saved" });
     });
   });
 });
+
+//GET route for comments
+router.get("/comments/list", async (req, res, next) => {
+  //Find comments from the database
+  await Comment.find({}).then((comment) => {
+    if (!comment) {
+      return res.status(404).json({ message: "No comments found" });
+    } else {
+      return res.json(comment);
+    }
+  });
+});
+
+//POST route for comments
+router.post("/comments/post", async (req, res, next) => {
+  //Find user based on the user ID on the comment body
+  await User.findOne({ _id: req.body.userID }).then((name) => {
+    //Create new comment
+    const newComment = new Comment({
+      id: req.body.id,
+      comment: req.body.comment,
+      author: name.username,
+    });
+    newComment
+      .save()
+      .then(() => {
+        return res.json({ message: "Commented!" });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+});
+
+module.exports = router;
 
 module.exports = router;

@@ -4,6 +4,7 @@ export const HomePage = (props) => {
   let navigate = useNavigate();
 
   const createNewSnippet = () => {
+    // TODO: check if user is already logged in, redirect to login page if not
     if (props.jwt) {
       navigate("/add");
     } else {

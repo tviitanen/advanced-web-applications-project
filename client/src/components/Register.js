@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+// REGISTER PAGE
 export const Register = (props) => {
   const [userData, setUserData] = useState({});
-  const jwt = props.jwt;
 
   let navigate = useNavigate();
 
+  // register data to be sent to server on submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (jwt) {
+
+    // TODO: check if user is already logged in, redirect to home page
+    if (props.jwt) {
       alert("You are already logged in");
       return;
     }
@@ -26,20 +29,18 @@ export const Register = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (data.token) {
-          props.setJwt(data.token);
-          props.setUser(
-            JSON.parse(
-              Buffer.from(data.token.split(".")[1], "base64").toString()
-            )
-          );
-          let path = `/register`;
+        if (data === true) {
+          alert("Registration successful");
+          setUserData(data);
+          let path = `/login`;
           navigate(path);
+        } else {
+          alert("Error occurred");
         }
+        console.log(data);
       });
   };
-
+  // handle form change
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };

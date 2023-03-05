@@ -4,15 +4,9 @@ const Schema = mongoose.Schema;
 
 let codeSchema = new Schema({
   author: { type: String },
-  snippets: [
-    {
-      title: { type: String },
-      date: { type: Date },
-      votes: { type: Number },
-      comments: [{ type: String }],
-      code: { type: String },
-    },
-  ],
+  title: { type: String },
+  date: { type: Date },
+  code: { type: String },
 });
 
 module.exports = mongoose.model("code", codeSchema);

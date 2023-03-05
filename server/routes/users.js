@@ -10,40 +10,22 @@ const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-/* GET users listing. */
-router.get("/list", validateToken, (req, res, next) => {
-  User.find({}, (err, users) => {
-    if (err) return next(err);
-    res.json(users);
-  });
-});
-
-router.get("/listx", (req, res) => {
-  User.find({}, (err, users) => {
-    console.log(users);
-  });
-  res.json({ status: "ok" });
-});
-
-router.get("/login", (req, res, next) => {});
-
-router.post("/login", upload.none(), (req, res, next) => {
-  console.log(req.body);
-
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (err) throw err;
+//Login POST route
+router.post("/login", upload.none(), async (req, res, next) => {
+  await User.findOne({ email: req.body.email }).then((user) => {
+    //If user is not found in the database, the login fails
     if (!user) {
-      console.log("User not found");
       return res.status(403).json({ message: "Login failed" });
     } else {
-      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-        if (err) throw err;
-        if (isMatch) {
+      //If user is found, then compare the passwords
+      bcrypt.compare(req.body.password, user.password, (err, found) => {
+        if (found) {
+          //Make jwt
           const jwtPayload = {
             id: user._id,
-            email: user.email,
+            name: user.name,
           };
-          console.log(process.env.SECRET);
+          //Sign jwt
           jwt.sign(
             jwtPayload,
             process.env.SECRET,
@@ -51,57 +33,72 @@ router.post("/login", upload.none(), (req, res, next) => {
               expiresIn: 120,
             },
             (err, token) => {
-              console.log(err);
-              console.log(token);
+              if (err) throw err;
+              //Respond with jwt token
               res.json({ success: true, token });
             }
           );
+        } else {
+          res.status(403).json({ message: "Invalid credentials" });
         }
       });
     }
   });
 });
 
-router.get("/register", (req, res, next) => {});
-
+// Register POST route
 router.post(
   "/register",
-  body("name").isLength({ min: 3 }).trim().escape(),
-  body("email").isLength({ min: 3 }).trim().escape(),
+  //Set lenght requirements for POST body
+  body("name").isLength({ min: 3 }).escape(),
+  body("email").isEmail().trim().escape(),
   body("password").isLength({ min: 5 }),
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    console.log(errors);
+    if (req.body.name < 3 || req.body.password < 5) {
+      return res.status(400).json({ message: "Password or name too short" });
+    } else if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    User.findOne({ email: req.body.email }, (err, user) => {
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-      if (user) {
-        console.log("Email already in use");
-        return res.status(403).json({ email: "Email already in use" });
-      } else {
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if (err) throw err;
-            User.create(
-              {
-                name: req.body.name,
-                email: req.body.email,
-                password: hash,
-              },
-              (err, ok) => {
-                if (err) throw err;
-                console.log("User created");
-                return res.redirect("/users/login");
-              }
-            );
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    //Check if email is already in the database
+    await User.findOne({ email: email })
+      .then((user) => {
+        if (user) {
+          return res.status(403).json({ message: "Email already in use" });
+        } else {
+          //Hash the password
+          bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, (err, hash) => {
+              //Save new user into the database
+              const newUser = new User(
+                {
+                  name: name,
+                  email: email,
+                  password: hash,
+                },
+                (err, ok) => {
+                  if (err) throw err;
+                }
+              );
+              newUser
+                .save()
+                .then(() => {
+                  return res.send(true);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            });
           });
-        });
-      }
-    });
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 );
 

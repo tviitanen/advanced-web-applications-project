@@ -1,47 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 
-export const Login = (props) => {
-  const [userData, setUserData] = useState({});
-
+// LOGIN PAGE
+export default function Login({ setJwt, jwt, user, setUser }) {
   let navigate = useNavigate();
-  const jwt = props.jwt;
 
+  // login data to be sent to server on submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (jwt) {
+
+    // TODO: check if user is already logged in, redirect to home page
+    if (!user) {
       alert("You are already logged in");
       return;
     }
-    console.log(userData.email);
 
     fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(user),
       mode: "cors",
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         if (data.token) {
-          props.setJwt(data.token);
-          props.setUser(
+          setJwt(data.token);
+          setUser(
             JSON.parse(
               Buffer.from(data.token.split(".")[1], "base64").toString()
             )
           );
-          let path = `/register`;
+          let path = `/`;
           navigate(path);
         }
       });
   };
 
+  // handle form change
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   return (
@@ -79,4 +81,4 @@ export const Login = (props) => {
       <Link to="/register"> Don't have an account? Register here. </Link>
     </div>
   );
-};
+}

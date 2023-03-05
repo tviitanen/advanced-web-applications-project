@@ -8,6 +8,8 @@ export const AddSnippet = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // TODO: check if user is already logged in, redirect to login page if not
     if (!jwt) {
       alert("You have to be logged in to add a snippet");
       return;
