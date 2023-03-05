@@ -31,7 +31,7 @@ router.get("/comments/list", async (req, res, next) => {
   //Find comments from the database
   await Comment.find({}).then((comment) => {
     if (!comment) {
-      return res.status(404).json({ message: "No comments found" });
+      return res.status(404).json({ message: "No comments yet" });
     } else {
       return res.json(comment);
     }
@@ -51,14 +51,12 @@ router.post("/comments/post", async (req, res, next) => {
     newComment
       .save()
       .then(() => {
-        return res.json({ message: "Commented!" });
+        return res.json({ message: "Comment saved" });
       })
       .catch((err) => {
         console.log(err);
       });
   });
 });
-
-module.exports = router;
 
 module.exports = router;
