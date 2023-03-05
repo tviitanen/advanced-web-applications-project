@@ -21,8 +21,9 @@ export const AddSnippet = (props) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        author: props.user.name,
-        snippets: { title: snippetData.title, code: snippetData.code },
+        author: jwt.user.name,
+        title: snippetData.title,
+        code: snippetData.code,
       }),
       mode: "cors",
     })
