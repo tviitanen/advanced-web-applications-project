@@ -34,3 +34,5 @@ Run `npm run dev` in root folder
 * [Cors](https://www.npmjs.com/package/cors) v2.8.5
 
 ## Grading
+
+## Screenshots
