@@ -8,8 +8,14 @@ export const Comment = (props) => {
     let path = `/`;
     navigate(path);
   };
+  const jwt = props.jwt;
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!jwt) {
+      alert("You have to be logged in to add a comment");
+      return;
+    }
     fetch("http://localhost:4000/api/add-data", {
       method: "POST",
       headers: {
@@ -43,12 +49,16 @@ export const Comment = (props) => {
           onChange={handleChange}
         >
           <label htmlFor="comment">Add comment</label>
-          <input
-            type="String"
-            placeholder="Type your comment here"
-            id="comment"
-            name="comment"
-          />
+          <div className="input-field">
+            <textarea
+              type="String"
+              required
+              className="materialize-textarea"
+              placeholder="Type your comment here"
+              id="comment"
+              name="comment"
+            />
+          </div>
           <button className="button" type="submit">
             Add comment
           </button>

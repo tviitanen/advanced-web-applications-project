@@ -9,7 +9,7 @@ export const AddSnippet = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!jwt) {
-      alert("You need to be logged in to add a snippet");
+      alert("You have to be logged in to add a snippet");
       return;
     }
 
@@ -52,7 +52,7 @@ export const AddSnippet = (props) => {
           name="title"
         />
         <label htmlFor="code">Code snippet</label>
-        <div className="input-field col s12">
+        <div className="input-field">
           <textarea
             type="String"
             required
