@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-export const HomePage = (jwt, user) => {
+export const HomePage = (jwt) => {
   let navigate = useNavigate();
 
   const createNewSnippet = () => {
-    // check if user is already logged in, redirect to login page if not
+    // TODO: check if user is already logged in, redirect to login page if not
     if (jwt.jwt !== false) {
+      console.log(jwt);
       navigate("/add-snippet");
     } else {
       navigate("/login");
@@ -15,7 +16,7 @@ export const HomePage = (jwt, user) => {
   return (
     <div>
       <h1>Code snippet app</h1>
-      <h2>{jwt ? `Welcome ${user.name}!` : ""}</h2>
+      <h2>{jwt ? `Welcome ${jwt.user.name}!` : ""}</h2>
       <button className="button" onClick={createNewSnippet}>
         +
       </button>
