@@ -23,7 +23,7 @@ export default function useWindowSize() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount and unmount
+  }); // Empty array ensures that effect is only run on mount and unmount
 
   return windowSize;
 }

@@ -9,8 +9,10 @@ import SideNav from "./components/SideNav";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  /*
   const [jwt, setJwt] = useState("");
   const [user, setUser] = useState({});
+  */
   const menuPaths = [
     {
       name: "Home",
@@ -21,8 +23,8 @@ function App() {
       path: "/register",
     },
     {
-      name: "Stuff",
-      path: "/stuff",
+      name: "Add snippet",
+      path: "/add-snippet",
     },
   ];
 
