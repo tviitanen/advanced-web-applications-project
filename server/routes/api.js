@@ -17,25 +17,13 @@ router.get("/snippets/list", async (req, res, next) => {
 });
 
 /* POST route to post code snippet */
-router.post("/snippets/post", validateToken, (req, res, next) => {
-  Code.findOne({ author: req.body.author }, (err, code) => {
-    if (err) return next(err);
-    new Code({
-      author: req.body.author,
-      snippets: [
-        {
-          title: req.body.title,
-          date: Date.now(),
-          votes: 0,
-          comments: "",
-          code: req.body.code,
-        },
-      ],
-    }).save((err) => {
-      if (err) return next(err);
-      return res.json({ message: "Code snippet saved" });
-    });
-  });
+router.post("/snippets/post", (req, res, next) => {
+  new Code({
+    author: req.body.author,
+    title: req.body.title,
+    code: req.body.code,
+  }).save();
+  return res.json({ message: "Code snippet saved" });
 });
 
 //GET route for comments

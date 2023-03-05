@@ -6,10 +6,8 @@ export const HomePage = (jwt) => {
   const createNewSnippet = () => {
     // TODO: check if user is already logged in, redirect to login page if not
     if (jwt.jwt !== false) {
-      console.log(jwt.jwt);
       navigate("/add-snippet");
     } else {
-      console.log(jwt.jwt);
       navigate("/login");
     }
   };

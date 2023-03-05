@@ -13,8 +13,7 @@ export const Register = (jwt) => {
     e.preventDefault();
 
     // check if user is already logged in, redirect to home page
-    if (jwt !== false) {
-      console.log(jwt);
+    if (jwt.jwt !== false) {
       alert("You are already logged in");
       return;
     }

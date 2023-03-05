@@ -6,20 +6,25 @@ export const AddSnippet = (jwt) => {
   const [snippetData, setSnippetData] = useState({});
 
   const handleSubmit = (event) => {
+    console.log(
+      jwt.user.id,
+      jwt.user.name,
+      snippetData.title,
+      snippetData.code
+    );
     event.preventDefault();
-    console.log(snippetData);
     // check if user is already logged in, redirect to login page if not
-    if (jwt !== false) {
+    if (jwt.jwt === false) {
       alert("You have to be logged in to add a snippet");
       return;
     }
-
     fetch("http://localhost:4000/api/snippets/post", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
+        id: jwt.user.id,
         author: jwt.user.name,
         title: snippetData.title,
         code: snippetData.code,
@@ -29,6 +34,7 @@ export const AddSnippet = (jwt) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setSnippetData(data);
       });
     navigate("/");
   };

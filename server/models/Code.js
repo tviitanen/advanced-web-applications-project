@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 let codeSchema = new Schema({
   author: { type: String },
   title: { type: String },
-  date: { type: Date },
   code: { type: String },
 });
 
