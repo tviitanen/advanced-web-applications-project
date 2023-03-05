@@ -7,11 +7,12 @@ const validateToken = require("../auth/validateToken.js");
 const multer = require("multer");
 const storage = multer.memoryStorage();
 
-/* GET code data from the DB. */
+/* GET snippet data from the DB. */
 router.get("/snippets/list", async (req, res, next) => {
   await Code.find({}, (err, codes) => {
     if (err) return next(err);
     if (!codes) return res.status(404).json({ message: "No codes found" });
+    console.log("codes found");
     res.json(codes);
   });
 });

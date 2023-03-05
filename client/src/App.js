@@ -4,8 +4,9 @@ import Login from "./components/Login";
 import { Register } from "./components/Register";
 import { HomePage } from "./components/HomePage";
 import { AddSnippet } from "./components/AddSnippet";
-import Posts from "./components/Posts";
+import SnippetData from "./components/SnippetData";
 import SideNav from "./components/SideNav";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
             path="/add-snippet"
             element={<AddSnippet user={user} jwt={jwt} />}
           />
-          <Route path="/posts" element={<Posts user={user} jwt={jwt} />} />
+          <Route path="/snippets" element={<SnippetData />} />
         </Routes>
       </div>
     </Router>
