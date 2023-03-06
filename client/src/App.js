@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import { Register } from "./components/Register";
 import { HomePage } from "./components/HomePage";
 import { AddSnippet } from "./components/AddSnippet";
-import SnippetData from "./components/SnippetData";
+import SnippetList from "./components/SnippetList";
+import Snippet from "./components/Snippet";
 import SideNav from "./components/SideNav";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -55,7 +56,9 @@ function App() {
             path="/add-snippet"
             element={<AddSnippet user={user} jwt={jwt} />}
           />
-          <Route path="/snippets" element={<SnippetData jwt={jwt} />} />
+          <Route path="/snippets" element={<SnippetList jwt={jwt} />} />
+          <Route path="/post/:id" element={<Snippet />} />
+          <Route path="*" element={<h1>404: Not Found</h1>} />
         </Routes>
       </div>
     </Router>
