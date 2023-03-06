@@ -57,7 +57,7 @@ function App() {
             element={<AddSnippet user={user} jwt={jwt} />}
           />
           <Route path="/snippets" element={<SnippetList jwt={jwt} />} />
-          <Route path="/post/:id" element={<Snippet />} />
+          <Route path="/snippets/:id" element={<Snippet />} />
           <Route path="*" element={<h1>404: Not Found</h1>} />
         </Routes>
       </div>

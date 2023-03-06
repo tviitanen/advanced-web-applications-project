@@ -7,6 +7,11 @@ function SnippetList(jwt) {
   const [snippetData, setSnippetData] = useState([]);
   let navigate = useNavigate();
 
+  // highlight.js for syntax highlighting
+  useEffect(() => {
+    hljs.highlightAll();
+  });
+
   const createNewSnippet = () => {
     // check if user is already logged in, redirect to login page if not
     if (jwt.jwt !== false) {
@@ -14,6 +19,10 @@ function SnippetList(jwt) {
     } else {
       navigate("/login");
     }
+  };
+
+  const openSnippet = (id) => {
+    navigate("/snippets/:" + id);
   };
 
   //Fetch posts
