@@ -20,7 +20,7 @@ function SnippetData(jwt) {
   //Fetch posts
   useEffect(() => {
     const value = setInterval(() => {
-      fetch("http://localhost:4000/api/snippets/list")
+      fetch("http://localhost:4000/api/list")
         .then((response) => response.json())
         .then((json) => {
           setSnippetData(json);

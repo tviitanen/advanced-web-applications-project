@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Comment = (props) => {
+export const Comment = (jwt, user) => {
   const [snippetData, setSnippetData] = useState({});
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/`;
     navigate(path);
   };
-  const jwt = props.jwt;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +21,8 @@ export const Comment = (props) => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        author: props.user.name,
-        snippets: { title: snippetData.title, comments: snippetData.comment },
+        author: user.name,
+        comments: snippetData.comment,
       }),
       mode: "cors",
     })

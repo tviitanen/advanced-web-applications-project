@@ -4,7 +4,7 @@ export const HomePage = (jwt) => {
   let navigate = useNavigate();
 
   const createNewSnippet = () => {
-    // TODO: check if user is already logged in, redirect to login page if not
+    // check if user is already logged in, redirect to login page if not
     if (jwt.jwt !== false) {
       navigate("/add-snippet");
     } else {

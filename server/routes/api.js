@@ -2,28 +2,51 @@ var express = require("express");
 var router = express.Router();
 const User = require("../models/User");
 const Code = require("../models/Code");
-const Comment = require("../models/Comment");
-const validateToken = require("../auth/validateToken.js");
-const multer = require("multer");
-const storage = multer.memoryStorage();
+const validateToken = require("../auth/validateToken");
 
-/* GET snippet data from the DB. */
-router.get("/snippets/list", async (req, res, next) => {
-  await Code.find({}).then((codes) => {
-    console.log(codes);
-    if (!codes) return res.status(404).json({ message: "No codes found" });
-    return res.json(codes);
-  });
+// GET snippet data from the DB.
+router.get("/list", async (req, res, next) => {
+  await Code.find({})
+    .then((snippets) => {
+      console.log(snippets);
+      if (!snippets) return res.status(404).json({ message: "No codes found" });
+      return res.status(200).json(snippets);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
 });
 
-/* POST route to post code snippet */
-router.post("/snippets/post", (req, res, next) => {
-  new Code({
+//GET a single snippet by id
+router.get("/:id", function (req, res, _next) {
+  Code.findById(req.params.id)
+    .then((snippet) => {
+      return res.status(200).json({ snippet });
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+});
+
+// POST route to post code snippet
+router.post("/post", validateToken, (req, res, next) => {
+  Code.create({
     author: req.body.author,
     title: req.body.title,
     code: req.body.code,
-  }).save();
-  return res.json({ message: "Code snippet saved" });
+    votes: 0,
+    voters: [],
+    comments: [],
+  })
+    .then((snippet) => {
+      return res.status(200).json({ message: "Code snippet saved" });
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
 });
 
 //GET route for comments
@@ -46,7 +69,7 @@ router.post("/comments/post", async (req, res, next) => {
     const newComment = new Comment({
       id: req.body.id,
       comment: req.body.comment,
-      author: name.username,
+      author: name.name,
     });
     newComment
       .save()

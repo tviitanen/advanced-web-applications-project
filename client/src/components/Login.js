@@ -31,6 +31,9 @@ export default function Login({ setJwt, jwt, user, setUser }) {
         console.log(data);
         if (data.token) {
           setJwt(data.token);
+          // save token to local storage
+          localStorage.setItem("token", data.token);
+          // decode token to get user data
           setUser(
             JSON.parse(
               Buffer.from(data.token.split(".")[1], "base64").toString()

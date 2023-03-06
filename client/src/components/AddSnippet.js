@@ -6,22 +6,17 @@ export const AddSnippet = (jwt) => {
   const [snippetData, setSnippetData] = useState({});
 
   const handleSubmit = (event) => {
-    console.log(
-      jwt.user.id,
-      jwt.user.name,
-      snippetData.title,
-      snippetData.code
-    );
     event.preventDefault();
     // check if user is already logged in, redirect to login page if not
     if (jwt.jwt === false) {
       alert("You have to be logged in to add a snippet");
       return;
     }
-    fetch("http://localhost:4000/api/snippets/post", {
+    fetch("http://localhost:4000/api/post", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify({
         id: jwt.user.id,
@@ -38,7 +33,7 @@ export const AddSnippet = (jwt) => {
       });
     navigate("/snippets");
   };
-
+  // handle change for form
   const handleChange = (event) => {
     setSnippetData({ ...snippetData, [event.target.name]: event.target.value });
   };
