@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { InputGroup, Modal, Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
@@ -12,6 +14,16 @@ function SnippetData(jwt) {
   const [postID, setPostId] = useState({});
   const [foundComment, setFoundComment] = useState([]);
   const [show, setShow] = useState(false);
+  let navigate = useNavigate();
+
+  const createNewSnippet = () => {
+    // check if user is already logged in, redirect to login page if not
+    if (jwt.jwt !== false) {
+      navigate("/add-snippet");
+    } else {
+      navigate("/login");
+    }
+  };
 
   const handleShow = (id) => {
     setShow(true);
@@ -73,6 +85,9 @@ function SnippetData(jwt) {
 
   return (
     <div className="container">
+      <button className="button" onClick={createNewSnippet}>
+        +
+      </button>
       {/*Maps posts to the page*/}
       {snippetData.map((snippetData) => (
         <div key={snippetData._id} className="row">
