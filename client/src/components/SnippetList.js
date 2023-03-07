@@ -44,7 +44,7 @@ function SnippetList(jwt) {
   }
 
   return (
-    <div className="container">
+    <div className="snippet-container">
       <button className="button" onClick={createNewSnippet}>
         +
       </button>
@@ -52,13 +52,22 @@ function SnippetList(jwt) {
       {snippetData.map((snippetData) => (
         <div key={snippetData._id} className="row">
           <div className="col s12">
-            <div className="card grey darken-3 ">
+            <div className="card grey darken-3">
               <div className="card-content white-text">
                 <span className="card-title">{snippetData.title}</span>
-                <p>{snippetData.code}</p>
-                <button onClick={() => openSnippet(snippetData._id)}>
+                <pre>
+                  <code>{snippetData.code}</code>
+                </pre>
+                <p>Author: {snippetData.author}</p>
+                <div className="card-action"></div>
+                <button
+                  className="button"
+                  onClick={() => openSnippet(snippetData._id)}
+                >
                   Open
                 </button>
+                <p>Votes: {snippetData.votes} </p>
+                <p>Comments: {snippetData.comments}</p>
               </div>
             </div>
           </div>
