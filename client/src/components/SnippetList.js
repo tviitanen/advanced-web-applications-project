@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
+import { useTranslation } from "react-i18next";
 
 function SnippetList(jwt) {
   const [snippetData, setSnippetData] = useState([]);
   let navigate = useNavigate();
+  const { t } = useTranslation();
 
   // highlight.js for syntax highlighting
   useEffect(() => {

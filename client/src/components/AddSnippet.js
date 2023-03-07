@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const AddSnippet = (jwt) => {
   let navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [snippetData, setSnippetData] = useState({});
 
   // handle submit for form

@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
+import { useTranslation } from "react-i18next";
 
 // LOGIN PAGE
 export default function Login({ setJwt, jwt, user, setUser }) {
   let navigate = useNavigate();
+  const { t } = useTranslation();
 
   // login data to be sent to server on submit
   const handleSubmit = (e) => {

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useWindowSize from "../hooks";
 import "../App.css";
+import { useTranslation } from "react-i18next";
 
 export default function SideNav(props) {
   const [slider, setSlider] = useState(false);
   const size = useWindowSize();
+  const { t } = useTranslation();
 
   return (
     <>

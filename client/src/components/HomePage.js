@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const HomePage = (jwt) => {
   let navigate = useNavigate();
+  const { t } = useTranslation();
 
   const createNewSnippet = () => {
     // check if user is already logged in, redirect to login page if not

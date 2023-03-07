@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // REGISTER PAGE
 export const Register = (jwt) => {
   const [userData, setUserData] = useState({});
 
   let navigate = useNavigate();
+  const { t } = useTranslation();
 
   // register data to be sent to server on submit
   const handleSubmit = (e) => {
