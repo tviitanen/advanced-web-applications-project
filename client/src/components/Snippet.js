@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
 
@@ -16,33 +16,52 @@ function Snippet(jwt, user) {
   // POST request to add comment
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!jwt) {
+    if (!jwt.jwt) {
       alert("You have to be logged in to add a comment");
       return;
     }
-    fetch("http://localhost:4000/api/add-data", {
-      method: "POST",
+    fetch(`http://localhost:4000/api/comment/${id}`, {
+      method: "PUT",
       headers: {
         "Content-type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("token"),
       },
-      body: JSON.stringify({
-        author: user.name,
-        comments: data.comment,
-      }),
+      body: JSON.stringify({ comment }),
       mode: "cors",
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Success:", data);
+        setData(data);
+        setComment("");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
 
-  // Update state when user types in form
-  const handleChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name]: event.target.value,
-    });
+  // Update state when user types in comment form
+  const handleChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  // Upvote post
+  const handleUpvote = (id) => {
+    fetch(`http://localhost:4000/api/upvote/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        //setData(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   // Fetch snippet data from server
@@ -89,36 +108,41 @@ function Snippet(jwt, user) {
                 <p>Author: {data.snippet.author}</p>
                 <div className="card-action"></div>
                 <p>Votes: {data.snippet.votes} </p>
-                <p>Comments: {data.snippet.comment}</p>
+                <p>Comments: {data.snippet.comments.length}</p>
+                <button className="button" onClick={() => handleUpvote(id)}>
+                  +1
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/*comment form*/}
-      <div className="form-container">
-        <form
-          className="addComment-form"
-          onSubmit={handleSubmit}
-          onChange={handleChange}
-        >
-          <h3>Add comment</h3>
-          <label htmlFor="comment">Add comment</label>
-          <div className="input-field">
-            <textarea
-              type="String"
-              required
-              className="materialize-textarea"
-              placeholder="Type your comment here"
-              id="comment"
-              name="comment"
-            />
-          </div>
-          <button className="button" type="submit">
-            Add comment
-          </button>
-        </form>
+      <div>
+        {/*comment form*/}
+        <div className="form-container">
+          <form
+            className="addComment-form"
+            display="none"
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+          >
+            <h3>Add comment</h3>
+            <label htmlFor="comment">Add comment</label>
+            <div className="input-field">
+              <textarea
+                type="String"
+                required
+                className="materialize-textarea"
+                placeholder="Type your comment here"
+                id="comment"
+                name="comment"
+              />
+            </div>
+            <button className="button" type="submit">
+              Add comment
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

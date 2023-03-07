@@ -67,7 +67,7 @@ function SnippetList(jwt) {
                   Open
                 </button>
                 <p>Votes: {snippetData.votes} </p>
-                <p>Comments: {snippetData.comments}</p>
+                <p>Comments: {snippetData.comments.length}</p>
               </div>
             </div>
           </div>

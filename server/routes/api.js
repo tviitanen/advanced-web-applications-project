@@ -49,37 +49,47 @@ router.post("/post", validateToken, (req, res, next) => {
     });
 });
 
-//GET route for comments
-router.get("/comments/list", async (req, res, next) => {
-  //Find comments from the database
-  await Comment.find({}).then((comment) => {
-    if (!comment) {
-      return res.status(404).json({ message: "No comments yet" });
-    } else {
-      return res.json(comment);
-    }
-  });
+//PUT route to add comments
+router.put("/comment/:id", validateToken, (req, res, next) => {
+  //Find user based on the user ID on the comment body
+  Code.findById(req.params.id)
+    .then((snippet) => {
+      //Create new comment
+      if (snippet) {
+        snippet.comments.push(req.body.comment);
+        snippet.save();
+        return res.status(200).json({ snippet });
+      } else {
+        return res.status(404).json({ message: "Post not found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
 });
 
-//POST route for comments
-router.post("/comments/post", async (req, res, next) => {
-  //Find user based on the user ID on the comment body
-  await User.findOne({ _id: req.body.userID }).then((name) => {
-    //Create new comment
-    const newComment = new Comment({
-      id: req.body.id,
-      comment: req.body.comment,
-      author: name.name,
+//PUT route to upvote & check if user has already voted
+router.put("/upvote/:id", validateToken, function (req, res, _next) {
+  Code.findById(req.params.id)
+    .then((snippet) => {
+      if (snippet) {
+        if (snippet.voters.includes(req.body.userId)) {
+          return res.status(403).json({ message: "You have already voted" });
+        } else {
+          snippet.votes += 1;
+          snippet.voters.push(req.body.userId);
+          snippet.save();
+          return res.status(200).json({ snippet });
+        }
+      } else {
+        return res.status(404).json({ message: "Post not found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
     });
-    newComment
-      .save()
-      .then(() => {
-        return res.json({ message: "Comment saved" });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
 });
 
 module.exports = router;
