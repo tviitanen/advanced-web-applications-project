@@ -4,7 +4,7 @@
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: whitesmoke;
   background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
 }
 
@@ -13,11 +13,16 @@
 .register-form,
 .addComment-form,
 .addSnippet-form
- {
+ {  
   padding: auto;
   display: flex;
   flex-direction: column;
-  background-color: #333;
+  background-color: #3e3e3e;
+}
+
+.card {
+  border-radius: 10px;
+  border: 1px solid whitesmoke;
 }
 
 .snippet-container {
@@ -27,16 +32,17 @@
   height: 100%;
   padding: auto;
 }
+
   .form-container {
     padding: 5rem;
-    border: 1px solid white;
+    border: 1px solid whitesmoke;
     border-radius: 10px;
     margin: 0.5rem;
   }
 
 @media (min-width: 979px) {
-  .snippet-container {
-padding-left: 200px;  }
+  body{
+padding-left: 300px;  }
 }
 
 label {
@@ -51,11 +57,25 @@ input {
   border-radius: 10px;
 }
 
-button {
-  margin: 0.5rem 0;
+.float {
   border: none;
-  background-color: white;
-  padding: 20px;
+  position: fixed;
+  width: 90px;
+  height: 90px;
+  bottom: 40px;
+  right: 40px;
+  background-color: rgb(228, 90, 90);
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 1;
+}
+
+button {
+  margin: 0.5rem;
+  background-color: whitesmoke;
+  padding: 10px;
   border-radius: 10px;
   cursor: pointer;
   color: #7439db;
@@ -65,18 +85,21 @@ button {
 
 .button:hover {
   background-color: #ADD8E6;
-  color: white;
+  color: whitesmoke;
 }
+
 .button:active {
   background-color: #008CBA;
   box-shadow: 0 5px #808185;
   transform: translateY(4px);
 }
+
 .link-btn {
   background: none;
-  color: white;
+  color: whitesmoke;
   text-decoration: underline;
 }
+
 .navbar {
   display: flex;
   text-align: right;
@@ -87,13 +110,22 @@ button {
   width: 100%;
   z-index: 1;
 }
+
+.sidenav{
+  background-color: whitesmoke;
+}
+
+.right{
+  margin-right: 20px;
+}
+
 body {
   padding-top: 55px;
   background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
 }
 
 .input-field textarea{
-  background-color: white;
+  background-color: whitesmoke;
   height: 100px;
   width: 100%;
   resize: none;
@@ -101,13 +133,13 @@ body {
   border: none;
   border-radius: 10px;
 }
+
 .input-field input {
-  color: white;
+  color: whitesmoke;
 }
+
 code{
   text-align: left;
-  background-color: #333;
-  color: white;
   padding: 1rem;
   border-radius: 10px;
   margin: 1rem 0;

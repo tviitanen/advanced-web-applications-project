@@ -15,6 +15,7 @@
   "dependencies": {
     "concurrently": "^7.6.0",
     "marked": "^4.2.12",
+    "prettier-format": "^3.1.0",
     "react-materialize": "^3.10.0"
   }
 }

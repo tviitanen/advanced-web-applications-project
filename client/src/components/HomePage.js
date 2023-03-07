@@ -15,10 +15,21 @@ export const HomePage = (jwt) => {
   return (
     <div>
       <h1>Code snippet app</h1>
-      <h2>{jwt.jwt ? `Welcome ${jwt.user.name}!` : ""}</h2>
-      <button className="button" onClick={createNewSnippet}>
-        +
-      </button>
+      {jwt.jwt ? (
+        <div>
+          <h3>Welcome {jwt.user.name}!</h3>
+          <button className="button" onClick={createNewSnippet}>
+            Add new Code Snippet
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h3>Please login to add a new snippet</h3>
+          <button className="button" onClick={createNewSnippet}>
+            Login
+          </button>
+        </div>
+      )}
     </div>
   );
 };

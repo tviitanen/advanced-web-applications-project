@@ -5,6 +5,7 @@ export const AddSnippet = (jwt) => {
   let navigate = useNavigate();
   const [snippetData, setSnippetData] = useState({});
 
+  // handle submit for form
   const handleSubmit = (event) => {
     event.preventDefault();
     // check if user is already logged in, redirect to login page if not
@@ -33,6 +34,7 @@ export const AddSnippet = (jwt) => {
       });
     navigate("/snippets");
   };
+
   // handle change for form
   const handleChange = (event) => {
     setSnippetData({ ...snippetData, [event.target.name]: event.target.value });

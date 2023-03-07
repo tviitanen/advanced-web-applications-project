@@ -10,11 +10,13 @@
     "buffer": "^6.0.3",
     "highlight.js": "^11.7.0",
     "http-proxy-middleware": "^2.0.6",
+    "i18next": "^22.4.11",
     "marked": "^4.2.12",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-i18next": "^12.2.0",
     "react-router-dom": "^6.8.2",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"

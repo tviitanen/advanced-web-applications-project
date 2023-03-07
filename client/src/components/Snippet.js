@@ -13,13 +13,19 @@ function Snippet(jwt, user) {
     hljs.highlightAll();
   });
 
+  const isLoggedIn = () => {
+    if (!jwt.jwt) {
+      alert("You have to be logged in to add a comment/upvote");
+      return;
+    }
+  };
+
   // POST request to add comment
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!jwt.jwt) {
-      alert("You have to be logged in to add a comment");
-      return;
-    }
+    // check if user is logged in
+    isLoggedIn();
+    console.log(jwt.user.name);
     fetch(`http://localhost:4000/api/comment/${id}`, {
       method: "PUT",
       headers: {
@@ -42,11 +48,14 @@ function Snippet(jwt, user) {
 
   // Update state when user types in comment form
   const handleChange = (e) => {
-    setComment(e.target.value);
+    setComment(e.target.value + " - " + jwt.user.name);
   };
 
   // Upvote post
   const handleUpvote = (id) => {
+    // check if user is logged in
+    isLoggedIn();
+
     fetch(`http://localhost:4000/api/upvote/${id}`, {
       method: "PUT",
       headers: {
@@ -109,10 +118,13 @@ function Snippet(jwt, user) {
                 <div className="card-action"></div>
                 <p>Votes: {data.snippet.votes} </p>
                 <p>Comments: {data.snippet.comments.length}</p>
-                <button className="button" onClick={() => handleUpvote(id)}>
-                  +1
-                </button>
-
+                {jwt.jwt ? (
+                  <button className="button" onClick={() => handleUpvote(id)}>
+                    +1
+                  </button>
+                ) : (
+                  ""
+                )}
                 {/*comments*/}
                 <div className="comments-container">
                   <h3>Comments</h3>
@@ -122,6 +134,7 @@ function Snippet(jwt, user) {
                     </div>
                   ))}
                 </div>
+                ""
               </div>
             </div>
           </div>
@@ -129,30 +142,34 @@ function Snippet(jwt, user) {
       </div>
       <div>
         {/*comment form*/}
-        <div className="form-container">
-          <form
-            className="addComment-form"
-            display="none"
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-          >
-            <h3>Add comment</h3>
-            <label htmlFor="comment">Add comment</label>
-            <div className="input-field">
-              <textarea
-                type="String"
-                required
-                className="materialize-textarea"
-                placeholder="Type your comment here"
-                id="comment"
-                name="comment"
-              />
-            </div>
-            <button className="button" type="submit">
-              Add comment
-            </button>
-          </form>
-        </div>
+        {jwt.jwt ? (
+          <div className="form-container">
+            <form
+              className="addComment-form"
+              display="none"
+              onSubmit={handleSubmit}
+              onChange={handleChange}
+            >
+              <h3>Add comment</h3>
+              <label htmlFor="comment">Add comment</label>
+              <div className="input-field">
+                <textarea
+                  type="String"
+                  required
+                  className="materialize-textarea"
+                  placeholder="Type your comment here"
+                  id="comment"
+                  name="comment"
+                />
+              </div>
+              <button className="button" type="submit">
+                Add comment
+              </button>
+            </form>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
