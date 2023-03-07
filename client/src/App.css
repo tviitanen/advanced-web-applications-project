@@ -21,14 +21,12 @@
 }
 
 .snippet-container {
-  
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   padding: auto;
 }
-
   .form-container {
     padding: 5rem;
     border: 1px solid white;
@@ -36,6 +34,10 @@
     margin: 0.5rem;
   }
 
+@media (min-width: 979px) {
+  .snippet-container {
+padding-left: 200px;  }
+}
 
 label {
   text-align: left;
@@ -50,6 +52,7 @@ input {
 }
 
 button {
+  margin: 0.5rem 0;
   border: none;
   background-color: white;
   padding: 20px;
@@ -59,6 +62,7 @@ button {
   font-weight: bold;
   transition-duration: 0.4s;
 }
+
 .button:hover {
   background-color: #ADD8E6;
   color: white;
@@ -74,6 +78,7 @@ button {
   text-decoration: underline;
 }
 .navbar {
+  display: flex;
   text-align: right;
   overflow: hidden;
   background-color: #333;
@@ -81,6 +86,10 @@ button {
   top: 0;
   width: 100%;
   z-index: 1;
+}
+body {
+  padding-top: 55px;
+  background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
 }
 
 .input-field textarea{

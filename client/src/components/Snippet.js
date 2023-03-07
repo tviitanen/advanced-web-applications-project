@@ -112,6 +112,16 @@ function Snippet(jwt, user) {
                 <button className="button" onClick={() => handleUpvote(id)}>
                   +1
                 </button>
+
+                {/*comments*/}
+                <div className="comments-container">
+                  <h3>Comments</h3>
+                  {data.snippet.comments.map((comment) => (
+                    <div className="comment" key={comment._id}>
+                      <p>{comment}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
