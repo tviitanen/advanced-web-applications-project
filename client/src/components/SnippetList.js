@@ -22,22 +22,26 @@ function SnippetList(jwt) {
   };
 
   const openSnippet = (id) => {
-    navigate("/snippets/:" + id);
+    navigate("/snippets/" + id);
   };
 
   //Fetch posts
   useEffect(() => {
-    const value = setInterval(() => {
+    async function getSnippets() {
       fetch("http://localhost:4000/api/list")
         .then((response) => response.json())
         .then((json) => {
           setSnippetData(json);
         });
-    }, 3000);
-    return () => {
-      clearInterval(value);
-    };
-  }, [snippetData]);
+      return () => {};
+    }
+    getSnippets();
+  }, []); // empty array means this effect will only run once (like componentDidMount in classes)
+
+  // Don't render until we have data
+  if (snippetData === null || snippetData === undefined) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">
@@ -48,10 +52,13 @@ function SnippetList(jwt) {
       {snippetData.map((snippetData) => (
         <div key={snippetData._id} className="row">
           <div className="col s12">
-            <div className="card grey darken-3">
+            <div className="card grey darken-3 ">
               <div className="card-content white-text">
                 <span className="card-title">{snippetData.title}</span>
                 <p>{snippetData.code}</p>
+                <button onClick={() => openSnippet(snippetData._id)}>
+                  Open
+                </button>
               </div>
             </div>
           </div>

@@ -19,7 +19,7 @@ router.get("/list", async (req, res, next) => {
 });
 
 //GET a single snippet by id
-router.get("/:id", function (req, res, _next) {
+router.get("/:id", function (req, res, next) {
   Code.findById(req.params.id)
     .then((snippet) => {
       return res.status(200).json({ snippet });
