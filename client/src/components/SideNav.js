@@ -68,7 +68,7 @@ export default function SideNav(props) {
           <h4>{props.title}</h4>
         </li>
         {props.paths.map((elt) => (
-          <li onClick={() => setSlider((s) => !s)}>
+          <li key={elt.name} onClick={() => setSlider((s) => !s)}>
             <Link className="waves-effect" to={elt.path}>
               {elt.name}
             </Link>
