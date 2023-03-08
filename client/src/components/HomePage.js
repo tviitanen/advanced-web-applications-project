@@ -7,7 +7,7 @@ export const HomePage = (jwt) => {
 
   const createNewSnippet = () => {
     // check if user is already logged in, redirect to login page if not
-    if (jwt.jwt !== false) {
+    if (localStorage.getItem("token") !== null) {
       navigate("/add-snippet");
     } else {
       navigate("/login");
@@ -17,7 +17,7 @@ export const HomePage = (jwt) => {
   return (
     <div>
       <h1>Code snippet app</h1>
-      {jwt.jwt ? (
+      {localStorage.getItem("token") ? (
         <div>
           <h3>
             {t("welcome")} {jwt.user.name}!

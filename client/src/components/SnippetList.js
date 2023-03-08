@@ -17,7 +17,7 @@ function SnippetList(jwt) {
 
   const createNewSnippet = () => {
     // check if user is already logged in, redirect to login page if not
-    if (jwt.jwt !== false) {
+    if (localStorage.getItem("token") !== !null) {
       navigate("/add-snippet");
     } else {
       navigate("/login");
@@ -48,7 +48,7 @@ function SnippetList(jwt) {
 
   return (
     <div className="snippet-list">
-      {jwt.jwt ? (
+      {localStorage.getItem("token") ? (
         <button className="float" onClick={createNewSnippet}>
           {t("addSnippet")}
         </button>
@@ -76,16 +76,12 @@ function SnippetList(jwt) {
                     {t("author")}: {snippetData.author}
                   </p>
                   <div className="card-action"></div>
-                  {jwt.jwt ? (
-                    <button
-                      className="button"
-                      onClick={() => openSnippet(snippetData._id)}
-                    >
-                      {t("open")}
-                    </button>
-                  ) : (
-                    ""
-                  )}
+                  <button
+                    className="button"
+                    onClick={() => openSnippet(snippetData._id)}
+                  >
+                    {t("open")}
+                  </button>
                   <p>
                     {t("votes")}: {snippetData.votes}{" "}
                   </p>

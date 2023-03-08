@@ -16,7 +16,7 @@ function Snippet(jwt, user) {
   });
 
   const isLoggedIn = () => {
-    if (!jwt.jwt) {
+    if (localStorage.getItem("token") === null) {
       alert(t("loginToVote"));
       return;
     }
@@ -68,7 +68,8 @@ function Snippet(jwt, user) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        //setData(data);
+        // Update state
+        setData(data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -126,23 +127,27 @@ function Snippet(jwt, user) {
                 <p>
                   {t("comments")}: {data.snippet.comments.length}
                 </p>
-                {jwt.jwt ? (
+                {localStorage.getItem("token") ? (
                   <button className="button" onClick={() => handleUpvote(id)}>
                     +1
                   </button>
                 ) : (
-                  ""
+                  <></>
                 )}
                 {/*comments*/}
                 <div className="comments-container">
                   <h3>{t("comments")}</h3>
-                  {data.snippet.comments.map((comment) => (
-                    <div className="comment" key={comment._id}>
-                      <p>{comment}</p>
-                    </div>
-                  ))}
+                  {/*Render comments if there are any*/}
+                  {data.snippet.comments.length > 0 ? (
+                    data.snippet.comments.map((comment) => (
+                      <div className="comment" key={comment._id}>
+                        <p>{comment}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>{t("noComments")}</p>
+                  )}
                 </div>
-                ""
               </div>
             </div>
           </div>
@@ -150,7 +155,7 @@ function Snippet(jwt, user) {
       </div>
       <div>
         {/*comment form*/}
-        {jwt.jwt ? (
+        {localStorage.getItem("token") ? (
           <div className="form-container">
             <form
               className="addComment-form"
@@ -176,7 +181,7 @@ function Snippet(jwt, user) {
             </form>
           </div>
         ) : (
-          ""
+          <></>
         )}
       </div>
     </div>

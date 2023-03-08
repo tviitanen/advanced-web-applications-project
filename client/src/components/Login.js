@@ -14,12 +14,10 @@ export default function Login({ setJwt, jwt, user, setUser }) {
     e.preventDefault();
 
     // check if user is already logged in, redirect to home page
-    if (jwt !== false) {
-      console.log(jwt);
+    if (localStorage.getItem("token") !== null) {
       alert(t("alreadyLoggedIn"));
       return;
     }
-
     fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {

@@ -11,11 +11,12 @@ export const AddSnippet = (jwt) => {
   // handle submit for form
   const handleSubmit = (event) => {
     event.preventDefault();
-    // check if user is already logged in, redirect to login page if not
-    if (jwt.jwt === false) {
-      alert(t("loginToAdd"));
-      return;
-    }
+    // alert that user needs to login to add snippet
+    localStorage.getItem("token")
+      ? console.log("logged in")
+      : alert(t("loginToAdd"));
+
+    // post snippet to database
     fetch("http://localhost:4000/api/post", {
       method: "POST",
       headers: {
@@ -35,7 +36,11 @@ export const AddSnippet = (jwt) => {
         console.log(data);
         setSnippetData(data);
       });
-    navigate("/snippets");
+    if (localStorage.getItem("token") == null) {
+      navigate("/login");
+    } else {
+      navigate("/snippets");
+    }
   };
 
   // handle change for form

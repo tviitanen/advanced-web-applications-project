@@ -15,7 +15,7 @@ export const Register = (jwt) => {
     e.preventDefault();
 
     // check if user is already logged in, redirect to home page
-    if (jwt.jwt !== false) {
+    if (localStorage.getItem("token") !== null) {
       alert(t("alreadyLoggedIn"));
       return;
     }
@@ -32,12 +32,12 @@ export const Register = (jwt) => {
       .then((response) => response.json())
       .then((data) => {
         if (data === true) {
-          alert("registerSuccess");
+          alert(t("registerSuccess"));
           setUserData(data);
           let path = `/login`;
           navigate(path);
         } else {
-          alert("registerFail");
+          alert(t("registerFail"));
         }
         console.log(data);
       });

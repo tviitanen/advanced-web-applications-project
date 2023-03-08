@@ -32,5 +32,6 @@
     "password": "Password",
     "add-comment": "Add Comment",
     "open": "Open",
-    "404": "404: Page not found"
+    "404": "404: Page not found",
+    "noComments": "No comments yet"
 }

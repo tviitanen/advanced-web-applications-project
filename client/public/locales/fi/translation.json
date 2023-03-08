@@ -12,7 +12,7 @@
     "registerFail": "Rekisteröityminen epäonnistui. Yritä uudelleen.",
     "loginSuccess": "Olet kirjautunut sisään.",
     "loginFail": "Kirjautuminen epäonnistui. Yritä uudelleen.",
-    "addSnippet": "Lisää uusi koodiesimerkki",
+    "addSnippet": "Lisää uusi",
     "loginToAdd": "Kirjaudu sisään lisätäksesi uuden koodiesimerkin.",
     "loginToVote": "Kirjaudu sisään äänestääksesi/kommentoidaksesi.",
     "welcome": "Tervetuloa",
@@ -30,5 +30,7 @@
     "password": "Salasana",
     "add-comment": "Lisää kommentti",
     "open": "Avaa",
-    "404": "404: Sivua ei löytynyt"
+    "404": "404: Sivua ei löytynyt",
+    "noComments": "Ei kommentteja vielä"
+
 }

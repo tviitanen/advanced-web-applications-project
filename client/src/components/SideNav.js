@@ -16,6 +16,10 @@ export default function SideNav(props) {
     if (lng === "en") i18n.changeLanguage("fi");
     else i18n.changeLanguage("en");
   };
+  const logOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <>
@@ -31,9 +35,15 @@ export default function SideNav(props) {
             <li key="home">
               <a href="/">{t("home")}</a>
             </li>
-            <li key="register">
-              <a href="/register">{t("signup")}</a>
-            </li>
+            {localStorage.getItem("token") ? (
+              <li key="logout">
+                <button onClick={logOut}>{t("logout")}</button>
+              </li>
+            ) : (
+              <li key="register">
+                <a href="/register">{t("signup")}</a>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

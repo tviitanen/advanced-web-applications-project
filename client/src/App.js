@@ -22,16 +22,16 @@ function App() {
       path: "/",
     },
     {
+      name: "Snippets",
+      path: "/snippets",
+    },
+    {
       name: "Sign up",
       path: "/register",
     },
     {
       name: "Add snippet",
       path: "/add-snippet",
-    },
-    {
-      name: "Snippets",
-      path: "/snippets",
     },
   ];
 
