@@ -3,25 +3,32 @@
 ## Introduction
 
 This application is a project work for Advanced Web Applications course held in LUT University in 2023.
-The application is simple and built with MERN-stack and allows users to authenticate, create codesnippets and comment them.
+The application is simple and built with MERN-stack and allows users to authenticate, create codesnippets and vote and comment them.
 
 ## Installing
 
 This app requires [Node.js](https://node.js.org/) and [mongoDb](https://www.mongodb.com/) to run.
 
+#### Clone
+
+Run `git clone https://github.com/tviitanen/advanced-web-applications-project.git` to clone the project.
+
 #### Init
 
-Run `npm install` in root folder
+Run `npm install && npm preinstall` in root folder to install dependencies for the client and server side
 
 #### Run project in development environment
 
-Run `npm run dev` in root folder
+Run `npm run dev` in root folder to start the project. Client launches on port 3000 and server on port 4000.
 
 ## Features
 
 - User can register & login
-- User can post code snippets
-- User can comment existing code snippets
+- Authenticated user can post code snippets
+- Authenticated user can comment existing code snippets
+- Authenticated user can vote existing posts (one vote/user)
+- All users are able to see all the content
+- Change language between english/finnish
 
 ## Technologies
 

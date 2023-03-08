@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "highlight.js/styles/github.css";
 import hljs from "highlight.js";
 import { useTranslation } from "react-i18next";
+import { marked } from "marked";
 
 function SnippetList(jwt) {
   const [snippetData, setSnippetData] = useState([]);
@@ -63,7 +64,13 @@ function SnippetList(jwt) {
                 <div className="card-content white-text">
                   <span className="card-title">{snippetData.title}</span>
                   <pre>
-                    <code>{snippetData.code}</code>
+                    <code>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: marked(snippetData.code),
+                        }}
+                      />
+                    </code>
                   </pre>
                   <p>
                     {t("author")}: {snippetData.author}
