@@ -7,7 +7,7 @@ The application is simple and built with MERN-stack and allows users to authenti
 
 ## Installing
 
-This app requires [Node.js](https://node.js.org/) to run.
+This app requires [Node.js](https://node.js.org/) and [mongoDb](https://www.mongodb.com/) to run.
 
 #### Init
 
@@ -40,6 +40,7 @@ Run `npm run dev` in root folder
 - [http-proxy-middleware](https://www.npmjs.com/package/http-proxy-middleware) v2.0.6
 - [Cors](https://www.npmjs.com/package/cors) v2.8.5
 - [Highlight.js](https://highlightjs.org/) v11.7.0
+- [i18next](https://www.i18next.com/) v22.4.11
 
 ## Grading
 

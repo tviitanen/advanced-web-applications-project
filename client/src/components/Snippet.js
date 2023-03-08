@@ -17,7 +17,7 @@ function Snippet(jwt, user) {
 
   const isLoggedIn = () => {
     if (!jwt.jwt) {
-      alert("You have to be logged in to add a comment/upvote");
+      alert(t("loginToVote"));
       return;
     }
   };
@@ -101,7 +101,7 @@ function Snippet(jwt, user) {
 
   // Don't render until we have data
   if (data === null || data === undefined) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   return (
@@ -116,10 +116,16 @@ function Snippet(jwt, user) {
                 <pre>
                   <code>{data.snippet.code}</code>
                 </pre>
-                <p>Author: {data.snippet.author}</p>
+                <p>
+                  {t("author")}: {data.snippet.author}
+                </p>
                 <div className="card-action"></div>
-                <p>Votes: {data.snippet.votes} </p>
-                <p>Comments: {data.snippet.comments.length}</p>
+                <p>
+                  {t("votes")}: {data.snippet.votes}{" "}
+                </p>
+                <p>
+                  {t("comments")}: {data.snippet.comments.length}
+                </p>
                 {jwt.jwt ? (
                   <button className="button" onClick={() => handleUpvote(id)}>
                     +1
@@ -129,7 +135,7 @@ function Snippet(jwt, user) {
                 )}
                 {/*comments*/}
                 <div className="comments-container">
-                  <h3>Comments</h3>
+                  <h3>{t("comments")}</h3>
                   {data.snippet.comments.map((comment) => (
                     <div className="comment" key={comment._id}>
                       <p>{comment}</p>
@@ -152,8 +158,8 @@ function Snippet(jwt, user) {
               onSubmit={handleSubmit}
               onChange={handleChange}
             >
-              <h3>Add comment</h3>
-              <label htmlFor="comment">Add comment</label>
+              <h3>{t("addComment")}</h3>
+              <label htmlFor="comment">{t("addComment")}</label>
               <div className="input-field">
                 <textarea
                   type="String"
@@ -165,7 +171,7 @@ function Snippet(jwt, user) {
                 />
               </div>
               <button className="button" type="submit">
-                Add comment
+                {t("addComment")}
               </button>
             </form>
           </div>

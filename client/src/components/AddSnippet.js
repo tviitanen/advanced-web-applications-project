@@ -13,7 +13,7 @@ export const AddSnippet = (jwt) => {
     event.preventDefault();
     // check if user is already logged in, redirect to login page if not
     if (jwt.jwt === false) {
-      alert("You have to be logged in to add a snippet");
+      alert(t("loginToAdd"));
       return;
     }
     fetch("http://localhost:4000/api/post", {
@@ -45,33 +45,33 @@ export const AddSnippet = (jwt) => {
 
   return (
     <div className="form-container">
-      <h2>Add Code Snippet</h2>
+      <h2>{t("addSnippet")}</h2>
       <form
         className="addSnippet-form"
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">{t("title")}</label>
         <input
           type="String"
           required
-          placeholder="Add title"
+          placeholder={t("addTitle")}
           id="title"
           name="title"
         />
-        <label htmlFor="code">Code snippet</label>
+        <label htmlFor="code">{t("codeSnippet")}</label>
         <div className="input-field">
           <textarea
             type="String"
             required
             className="materialize-textarea"
-            placeholder="Type your code here"
+            placeholder={t("codeSnippetText")}
             id="code"
             name="code"
           />
         </div>
         <button className="button" type="submit">
-          Add snippet
+          {t("addSnippet")}
         </button>
       </form>
     </div>

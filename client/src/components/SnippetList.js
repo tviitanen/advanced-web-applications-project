@@ -42,14 +42,14 @@ function SnippetList(jwt) {
 
   // Don't render until we have data
   if (snippetData === null || snippetData === undefined) {
-    return <div>Loading...</div>;
+    return <div>{t("loading")}</div>;
   }
 
   return (
     <div className="snippet-list">
       {jwt.jwt ? (
         <button className="float" onClick={createNewSnippet}>
-          Add new Code Snippet
+          {t("addSnippet")}
         </button>
       ) : (
         ""
@@ -65,20 +65,26 @@ function SnippetList(jwt) {
                   <pre>
                     <code>{snippetData.code}</code>
                   </pre>
-                  <p>Author: {snippetData.author}</p>
+                  <p>
+                    {t("author")}: {snippetData.author}
+                  </p>
                   <div className="card-action"></div>
                   {jwt.jwt ? (
                     <button
                       className="button"
                       onClick={() => openSnippet(snippetData._id)}
                     >
-                      Open
+                      {t("open")}
                     </button>
                   ) : (
                     ""
                   )}
-                  <p>Votes: {snippetData.votes} </p>
-                  <p>Comments: {snippetData.comments.length}</p>
+                  <p>
+                    {t("votes")}: {snippetData.votes}{" "}
+                  </p>
+                  <p>
+                    {t("comments")}: {snippetData.comments.length}
+                  </p>
                 </div>
               </div>
             </div>

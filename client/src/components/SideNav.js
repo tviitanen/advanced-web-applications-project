@@ -7,7 +7,15 @@ import { useTranslation } from "react-i18next";
 export default function SideNav(props) {
   const [slider, setSlider] = useState(false);
   const size = useWindowSize();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lng = i18n.language;
+
+  // change language
+  const changeLanguage = () => {
+    const lng = i18n.language;
+    if (lng === "en") i18n.changeLanguage("fi");
+    else i18n.changeLanguage("en");
+  };
 
   return (
     <>
@@ -17,11 +25,14 @@ export default function SideNav(props) {
         </p>
         <div className="container">
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <a href="/">Home</a>
+            <li key="changelng">
+              <button onClick={changeLanguage}>{lng}</button>
             </li>
-            <li>
-              <a href="/register">Sign up</a>
+            <li key="home">
+              <a href="/">{t("home")}</a>
+            </li>
+            <li key="register">
+              <a href="/register">{t("signup")}</a>
             </li>
           </ul>
         </div>

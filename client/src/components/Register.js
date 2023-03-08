@@ -16,7 +16,7 @@ export const Register = (jwt) => {
 
     // check if user is already logged in, redirect to home page
     if (jwt.jwt !== false) {
-      alert("You are already logged in");
+      alert(t("alreadyLoggedIn"));
       return;
     }
     console.log(userData.email);
@@ -32,12 +32,12 @@ export const Register = (jwt) => {
       .then((response) => response.json())
       .then((data) => {
         if (data === true) {
-          alert("Registration successful");
+          alert("registerSuccess");
           setUserData(data);
           let path = `/login`;
           navigate(path);
         } else {
-          alert("Error occurred");
+          alert("registerFail");
         }
         console.log(data);
       });
@@ -49,17 +49,17 @@ export const Register = (jwt) => {
 
   return (
     <div className="form-container">
-      <h2>Register</h2>
+      <h2>{t("register")}</h2>
       <form
         className="register-form"
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
-        <label htmlFor="name">Full name</label>
+        <label htmlFor="name">{t("fullName")}</label>
         <div className="input-field">
-          <input name="name" id="name" required placeholder="full name" />
+          <input name="name" id="name" required placeholder={t("fullName")} />
         </div>
-        <label htmlFor="email">email</label>
+        <label htmlFor="email">{t("email")}</label>
         <div className="input-field">
           <input
             type="email"
@@ -69,7 +69,7 @@ export const Register = (jwt) => {
             name="email"
           />
         </div>
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">{t("password")}</label>
         <div className="input-field">
           <input
             type="password"
@@ -80,10 +80,10 @@ export const Register = (jwt) => {
           />
         </div>
         <button type="submit" className="button">
-          Register
+          {t("register")}
         </button>
       </form>
-      <Link to="/login"> Already have an account? Login here. </Link>
+      <Link to="/login"> {t("registerExisting")} </Link>
     </div>
   );
 };

@@ -16,7 +16,7 @@ export default function Login({ setJwt, jwt, user, setUser }) {
     // check if user is already logged in, redirect to home page
     if (jwt !== false) {
       console.log(jwt);
-      alert("You are already logged in");
+      alert(t("alreadyLoggedIn"));
       return;
     }
 
@@ -42,7 +42,10 @@ export default function Login({ setJwt, jwt, user, setUser }) {
             )
           );
           let path = `/`;
+          alert(t("loginSuccess"));
           navigate(path);
+        } else {
+          alert(t("loginFail"));
         }
       });
   };
@@ -54,13 +57,13 @@ export default function Login({ setJwt, jwt, user, setUser }) {
 
   return (
     <div className="form-container">
-      <h2>Login</h2>
+      <h2>{t("login")}</h2>
       <form
         className="login-form"
         onSubmit={handleSubmit}
         onChange={handleChange}
       >
-        <label htmlFor="email">email</label>
+        <label htmlFor="email">{t("email")}</label>
         <div className="input-field">
           <input
             type="email"
@@ -70,7 +73,7 @@ export default function Login({ setJwt, jwt, user, setUser }) {
             name="email"
           />
         </div>
-        <label htmlFor="password">password</label>
+        <label htmlFor="password">{t("password")}</label>
         <div className="input-field">
           <input
             type="password"
@@ -81,10 +84,10 @@ export default function Login({ setJwt, jwt, user, setUser }) {
           />
         </div>
         <button className="button" type="submit">
-          Log In
+          {t("login")}
         </button>
       </form>
-      <Link to="/register"> Don't have an account? Register here. </Link>
+      <Link to="/register"> {t("loginNonExisting")} </Link>
     </div>
   );
 }

@@ -7,14 +7,14 @@ import { AddSnippet } from "./components/AddSnippet";
 import SnippetList from "./components/SnippetList";
 import Snippet from "./components/Snippet";
 import SideNav from "./components/SideNav";
-
+import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   // use state to store jwt and user data
   const [jwt, setJwt] = useState(false);
   const [user, setUser] = useState({});
-
+  const { t } = useTranslation();
   // paths for the side nav
   const menuPaths = [
     {
@@ -61,7 +61,7 @@ function App() {
             path="/snippets/:id"
             element={<Snippet user={user} jwt={jwt} />}
           />
-          <Route path="*" element={<h1>404: Not Found</h1>} />
+          <Route path="*" element={<h1>{t("404")}</h1>} />
         </Routes>
       </div>
     </Router>

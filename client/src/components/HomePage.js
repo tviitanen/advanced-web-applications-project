@@ -19,16 +19,18 @@ export const HomePage = (jwt) => {
       <h1>Code snippet app</h1>
       {jwt.jwt ? (
         <div>
-          <h3>Welcome {jwt.user.name}!</h3>
+          <h3>
+            {t("welcome")} {jwt.user.name}!
+          </h3>
           <button className="button" onClick={createNewSnippet}>
-            Add new Code Snippet
+            {t("addSnippet")}
           </button>
         </div>
       ) : (
         <div>
-          <h3>Please login to add a new snippet</h3>
+          <h3>{t("loginToAdd")}</h3>
           <button className="button" onClick={createNewSnippet}>
-            Login
+            {t("login")}
           </button>
         </div>
       )}
