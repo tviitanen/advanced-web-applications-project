@@ -28,7 +28,7 @@ export default function SideNav(props) {
           <i className="material-icons">menu</i>
         </p>
         <div className="container">
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <ul id="nav-mobile" className="right">
             <li key="changelng">
               <button onClick={changeLanguage}>{lng}</button>
             </li>

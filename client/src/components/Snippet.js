@@ -63,6 +63,7 @@ function Snippet(jwt, user) {
       headers: {
         "Content-Type": "application/json",
         authorization: "Bearer " + localStorage.getItem("token"),
+        mode: "cors",
       },
     })
       .then((response) => response.json())
@@ -85,6 +86,7 @@ function Snippet(jwt, user) {
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("token"),
+          mode: "cors",
         },
       })
         .then((response) => response.json())

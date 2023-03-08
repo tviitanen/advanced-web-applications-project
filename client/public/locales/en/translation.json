@@ -33,5 +33,7 @@
     "add-comment": "Add Comment",
     "open": "Open",
     "404": "404: Page not found",
-    "noComments": "No comments yet"
+    "noComments": "No comments yet",
+    "snippets": "Snippets"
+
 }

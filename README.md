@@ -23,7 +23,7 @@ Run `npm run dev` in root folder to start the project. Client launches on port 3
 
 ## Features
 
-- User can register & login
+- User can register, login & logout
 - Authenticated user can post code snippets
 - Authenticated user can comment existing code snippets
 - Authenticated user can vote existing posts (one vote/user)

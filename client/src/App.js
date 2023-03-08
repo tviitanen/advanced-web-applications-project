@@ -16,21 +16,26 @@ function App() {
   const [user, setUser] = useState({});
   const { t } = useTranslation();
   // paths for the side nav
+  let home = t("home");
+  let snippets = t("snippets");
+  let signUp = t("signup");
+  let addSnippet = t("addSnippet");
+
   const menuPaths = [
     {
-      name: "Home",
+      name: home,
       path: "/",
     },
     {
-      name: "Snippets",
+      name: snippets,
       path: "/snippets",
     },
     {
-      name: "Sign up",
+      name: signUp,
       path: "/register",
     },
     {
-      name: "Add snippet",
+      name: addSnippet,
       path: "/add-snippet",
     },
   ];

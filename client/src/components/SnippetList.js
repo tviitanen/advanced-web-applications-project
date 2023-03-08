@@ -31,7 +31,7 @@ function SnippetList(jwt) {
   //Fetch posts
   useEffect(() => {
     async function getSnippets() {
-      fetch("http://localhost:4000/api/list")
+      fetch("http://localhost:4000/api/list", { mode: "cors" })
         .then((response) => response.json())
         .then((json) => {
           setSnippetData(json);
